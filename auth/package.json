@@ -4,7 +4,7 @@
   "description": "Vend's auth service",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts"
+    "start": "nodemon --exec ts-node --files src/index.ts"
   },
   "author": "Bill Kerr",
   "license": "MIT",
@@ -17,7 +17,8 @@
     "express-validator": "^6.6.1",
     "firebase-admin": "^9.0.0",
     "mongoose": "^5.9.28",
-    "ts-node-dev": "^1.0.0-pre.56",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   },
   "devDependencies": {}

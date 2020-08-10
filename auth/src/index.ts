@@ -1,7 +1,6 @@
 import * as mongoose from "mongoose";
 import * as firebase from "firebase-admin";
 import { app } from "./app";
-import { Request, Response } from "express";
 
 const startApp = async () => {
   checkEnvironment("MONGO_URI", "PORT", "FIREBASE_CONFIG");
@@ -10,6 +9,7 @@ const startApp = async () => {
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     console.log("Auth service connected to MongoDB.");
   } catch (error) {
@@ -23,12 +23,7 @@ const startApp = async () => {
     console.error(error);
   }
 
-  app.use("*", (_req: Request, res: Response) => {
-    console.log("hey");
-    res.send({ message: "hello world!" });
-  });
-
-  const port = process.env.PORT;
+  const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Auth service listening on port ${port}.`);
   });
