@@ -20,6 +20,11 @@ spec:
               value: "mongodb://auth-db-srv:27017/auth"
             - name: PORT
               value: "3000"
+            - name: FIREBASE_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-admin-credentials
+                  key: FIREBASE_CONFIG
 ---
 apiVersion: v1
 kind: Service
@@ -27,7 +32,7 @@ metadata:
   name: auth-srv
 spec:
   selector:
-    app: auth-srv
+    app: auth
   ports:
     - name: auth
       protocol: TCP

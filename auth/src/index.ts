@@ -1,18 +1,32 @@
 import * as mongoose from "mongoose";
+import * as firebase from "firebase-admin";
 import { app } from "./app";
+import { Request, Response } from "express";
 
 const startApp = async () => {
-  // check for env variables
-  checkEnvironment("MONGO_URI", "PORT");
+  checkEnvironment("MONGO_URI", "PORT", "FIREBASE_CONFIG");
 
   try {
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log("Auth service connected to MongoDB.");
   } catch (error) {
     console.error(error);
   }
+
+  try {
+    firebase.initializeApp();
+    console.log("Auth service Firebase authentication initialized.");
+  } catch (error) {
+    console.error(error);
+  }
+
+  app.use("*", (_req: Request, res: Response) => {
+    console.log("hey");
+    res.send({ message: "hello world!" });
+  });
 
   const port = process.env.PORT;
   app.listen(port, () => {
