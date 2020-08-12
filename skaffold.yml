@@ -7,7 +7,7 @@ deploy:
       - ./infra/k8s-dev/*
 build:
   local:
-    push: false
+    push: true
   artifacts:
     - image: bk7987/vend-auth
       context: auth
@@ -24,4 +24,12 @@ build:
       sync:
         manual:
           - src: "src/**/*.ts"
+            dest: .
+    - image: bk7987/vend-review
+      context: review
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.cs"
             dest: .

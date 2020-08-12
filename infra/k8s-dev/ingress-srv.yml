@@ -18,3 +18,7 @@ spec:
             backend:
               serviceName: user-srv
               servicePort: 3000
+          - path: /api/reviews/?(.*)
+            backend:
+              serviceName: review-srv
+              servicePort: 3000

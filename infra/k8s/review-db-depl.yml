@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-db-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: review-db
+  template:
+    metadata:
+      labels:
+        app: review-db
+    spec:
+      containers:
+        - name: review-db
+          image: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: review-db-password
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: review-db-user
+                  key: POSTGRES_USER
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: review-db
+                  key: POSTGRES_DB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: review-db-srv
+spec:
+  selector:
+    app: review-db
+  ports:
+    - name: db
+      protocol: TCP
+      port: 5432
+      targetPort: 5432

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: review
+  template:
+    metadata:
+      labels:
+        app: review
+    spec:
+      containers:
+        - name: review
+          image: bk7987/vend-review
+          env:
+            - name: ASPNETCORE_URLS
+              value: "http://+:3000"
+            - name: FIREBASE_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-admin-credentials
+                  key: FIREBASE_CONFIG
+            - name: REVIEW_DB_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: review-db-connection-string
+                  key: REVIEW_DB_CONNECTION_STRING
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: review-srv
+spec:
+  selector:
+    app: review
+  ports:
+    - name: review
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

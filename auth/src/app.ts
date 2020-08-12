@@ -7,7 +7,7 @@ app.set("trust proxy", true);
 app.use(json());
 
 app.all("*", async (_req: express.Request, res: express.Response) => {
-  res.send({ message: "hello world!" });
+  res.send({ message: "hello world!!!" });
 });
 
 export { app };
