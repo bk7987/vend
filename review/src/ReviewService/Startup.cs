@@ -36,6 +36,8 @@ namespace ReviewService
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UsePathBase("/api/reviews");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

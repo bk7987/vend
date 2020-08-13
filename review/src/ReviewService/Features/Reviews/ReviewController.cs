@@ -11,5 +11,11 @@ namespace ReviewService.Features.Reviews
             System.Console.WriteLine("testing");
             return Ok("testing 121fddf3ldfjsdlfksldkjfd4a");
         }
+
+        [HttpGet("{id}")]
+        public ActionResult GetReviewById()
+        {
+            return Ok();
+        }
     }
 }

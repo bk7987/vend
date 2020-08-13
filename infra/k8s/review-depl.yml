@@ -17,7 +17,7 @@ spec:
           image: bk7987/vend-review
           env:
             - name: ASPNETCORE_URLS
-              value: "http://+:3000"
+              value: "http://+:3000/"
             - name: FIREBASE_CONFIG
               valueFrom:
                 secretKeyRef:
