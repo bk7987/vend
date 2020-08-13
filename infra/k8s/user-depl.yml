@@ -20,6 +20,14 @@ spec:
               value: "mongodb://user-db-srv:27017/user"
             - name: PORT
               value: "3000"
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: vend
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: FIREBASE_CONFIG
               valueFrom:
                 secretKeyRef:
