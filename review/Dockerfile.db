@@ -1,0 +1,3 @@
+FROM postgres:alpine
+
+COPY  ./src/ReviewService/Migrations/migrations.sql ./docker-entrypoint-initdb.d

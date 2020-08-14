@@ -1,15 +1,27 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using ReviewService.Data;
 
 namespace ReviewService.Features.Reviews
 {
     [Route("/")]
     public class ReviewController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult GetAllReviews()
+        private readonly IReviewRepository _repository;
+        private readonly IMapper _mapper;
+
+        public ReviewController(IReviewRepository repository, IMapper mapper)
         {
-            System.Console.WriteLine("testing");
-            return Ok("testing 121fddf3ldfjsdlfksldkjfd4a");
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<ReviewReadDto>> GetReviews()
+        {
+            var reviews = _repository.GetReviews();
+            return Ok(_mapper.Map<IEnumerable<ReviewReadDto>>(reviews));
         }
 
         [HttpGet("{id}")]
