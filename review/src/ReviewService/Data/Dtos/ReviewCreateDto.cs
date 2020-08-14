@@ -8,5 +8,8 @@ namespace ReviewService.Data
         public int Rating { get; set; }
 
         public string ReviewText { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
     }
 }

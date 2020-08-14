@@ -6,5 +6,6 @@ namespace ReviewService.Data
         public int Rating { get; set; }
         public int UpVotes { get; set; }
         public string ReviewText { get; set; }
+        public string UserId { get; set; }
     }
 }

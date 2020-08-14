@@ -9,6 +9,7 @@ namespace ReviewService.Profiles
         public ReviewProfile()
         {
             CreateMap<Review, ReviewReadDto>();
+            CreateMap<ReviewCreateDto, Review>();
         }
     }
 }

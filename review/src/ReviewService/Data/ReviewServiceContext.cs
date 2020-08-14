@@ -1,5 +1,5 @@
-using ReviewService.Domain;
 using Microsoft.EntityFrameworkCore;
+using ReviewService.Domain;
 
 namespace ReviewService.Data
 {

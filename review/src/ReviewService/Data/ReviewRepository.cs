@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ReviewService.Domain;
 
@@ -14,7 +15,12 @@ namespace ReviewService.Data
 
         public void CreateReview(Review review)
         {
-            throw new System.NotImplementedException();
+            if (review == null)
+            {
+                throw new ArgumentNullException(nameof(review));
+            }
+
+            _context.Reviews.Add(review);
         }
 
         public void DeleteReview(Review review)
